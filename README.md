@@ -30,7 +30,8 @@ fully customize your `_changes` request. They include the following:
   heartbeat: 30 * 1000, // how often we want couchdb to send us a heartbeat message
   style: 'main_only', // specifies how many revisions returned all_docs would return leaf revs
   include_docs: false, // whether or not we want to return the full document as a property
-  query_params: {} // custom arbitrary params to send in request e.g. { hello: 'world' }
+  query_params: {}, // custom arbitrary params to send in request e.g. { hello: 'world' }
+  default_method: 'GET' // allows you to override the default HTTP method, typically to switch it to POST
 }
 ```
 

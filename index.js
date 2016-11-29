@@ -40,6 +40,7 @@ function ChangesStream (options) {
   // Time to wait for a new change before we jsut retry a brand new request
   this.inactivity_ms = options.inactivity_ms || 60 * 60 * 1000;
   this.reconnect = options.reconnect || { minDelay: 100, maxDelay: 30 * 1000, retries: 5 };
+  this.default_method = options.default_method || 'GET';
   this.db = typeof options === 'string'
     ? options
     : options.db;
@@ -124,7 +125,7 @@ ChangesStream.prototype.request = function () {
   //
   // Handle both cases of POST and GET
   //
-  opts.method = this.filterIds ? 'POST' : 'GET';
+  opts.method = this.filterIds ? 'POST' : this.default_method;
   opts.timeout = this.requestTimeout;
   opts.rejectUnauthorized = this.rejectUnauthorized;
   opts.headers = {
